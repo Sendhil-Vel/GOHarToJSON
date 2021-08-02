@@ -41,7 +41,6 @@ Go get https://github.com/Sendhil-Vel/GoHarToJSON
 `Go Run *.go`
 
 ## Development
-```
 //Windows
 `Go Run main.go struct.go`
 
