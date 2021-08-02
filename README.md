@@ -11,7 +11,7 @@ Objective : All the API which has been executed at browser need to be imported i
 ## Platforms Supported
 * For all projects, it will be MacOS, Windows, and Linux
 ## Version
-* 1.13.8
+* 1.2.3
 
 ## Code style
 Standard [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](https://github.com/feross/standard)
