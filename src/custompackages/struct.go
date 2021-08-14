@@ -1,4 +1,4 @@
-package main
+package custompackages
 
 type MainObj struct {
 	Main FullObj `json:main`

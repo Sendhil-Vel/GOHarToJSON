@@ -9,6 +9,8 @@ import (
 	"io/ioutil"
 	"runtime"
 	"strings"
+
+	Custom "gohartojson/src/custompackages"
 )
 
 var mapstringinterface map[string]interface{}
@@ -37,14 +39,14 @@ func main() {
 	objarray := processinterface_array(entries)
 	// fmt.Println(errobj)
 	// fmt.Println(objarray)
-	var MObj FullObj
+	var MObj Custom.FullObj
 	MObj.Info.Name = "Data"
 	MObj.Info.Schema = "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	MObj.Item = objarray
 	writefile(MObj)
 }
 
-func writefile(objarray FullObj) {
+func writefile(objarray Custom.FullObj) {
 	filename := "test_api.json"
 	filedata, errobj := json.Marshal(objarray)
 	if errobj != nil {
@@ -86,14 +88,14 @@ func readfile(filename string) (filedata []byte, errobj error) {
 	return
 }
 
-func processinterface_array(apidata []interface{}) (collection []ParaCol) {
+func processinterface_array(apidata []interface{}) (collection []Custom.ParaCol) {
 	for _, val := range apidata {
 		// fmt.Println(key, " : ", reflect.TypeOf(val), " : ")
 		a, _ := ConvertData(val, "Map")
 		// fmt.Println("aaaaaaaaaaaaa : ", request["request"], "aaaaaaaaaaaaa", reflect.TypeOf(request["request"]))
 		request, _ := ConvertData(a["request"], "Map")
 		// fmt.Println("aaaaaaaaaaaaa : ", request, "aaaaaaaaaaaaa", reflect.TypeOf(request))
-		var obj ParaCol
+		var obj Custom.ParaCol
 		var nm string
 		obj.Request.Method = getMethod(request)
 		obj.Request.Url.Raw, obj.Request.Url.ProtoCol, obj.Request.Url.Host, obj.Request.Url.Port, obj.Request.Url.Path, nm = getUrlData(request)
@@ -116,13 +118,13 @@ func getBody(data map[string]interface{}) (bbody string) {
 	return
 }
 
-func getHeader(data map[string]interface{}) (Header []HeaderCol) {
+func getHeader(data map[string]interface{}) (Header []Custom.HeaderCol) {
 	_, dataobj := ConvertData(data["headers"], "Interface")
 	// fmt.Println(dataobj)
 	for i := 0; i < len(dataobj); i = i + 1 {
 		// fmt.Println(dataobj[i])
 		hdt := dataobj[i].(map[string]interface{})
-		var hd HeaderCol
+		var hd Custom.HeaderCol
 		hd.Key = fmt.Sprint(hdt["name"])
 		hd.Value = fmt.Sprint(hdt["value"])
 		Header = append(Header, hd)
